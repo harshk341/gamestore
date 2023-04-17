@@ -1,3 +1,8 @@
+:root {
+    --white-gray: #f2f2f2;
+    --text-color: #505050;
+}
+
 @mixin container-style {
     width: 100%;
     display: flex;

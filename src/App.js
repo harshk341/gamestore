@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from 'src/components';
+import { Games, Header } from 'src/components';
 
 function App() {
   return (
@@ -7,6 +7,7 @@ function App() {
       <div className="app_wrapper">
         <div className="app_wrapper__content">
           <Header />
+          <Games />
         </div>
       </div>
     </div>

@@ -1,0 +1,57 @@
+.game-item {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &__background {
+        width: 100%;
+        height: 200px;
+        background: {
+            size: cover;
+            position: center;
+            repeat: no-repeat;
+        };
+    }
+
+    &__info {
+        background-color: var(--white-gray);
+        padding: 0.8rem;
+
+        &__top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            & > .platforms {
+                flex-grow: 1;
+                
+                & > .icon {
+                    display: inline-block;
+                    margin-right: 5px;
+                }
+            }
+
+            & > .metascore {
+                width: 32px;
+                height: 32px;
+                border: 1px solid var(--text-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                cursor: default;
+            }
+        }
+
+        &__bottom {
+            margin-bottom: 0.8rem;
+
+            & > .title {
+                font-size: 1.3rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
