@@ -1,5 +1,7 @@
 import React from 'react';
-import { Games, Header } from 'src/components';
+import { Route, Routes } from 'react-router-dom';
+import { Games, Header, Game } from 'src/components';
+import { GAME, GAME_SCREENSHOT } from './rawData';
 
 function App() {
   return (
@@ -7,7 +9,16 @@ function App() {
       <div className="app_wrapper">
         <div className="app_wrapper__content">
           <Header />
-          <Games />
+          <Routes>
+            <Route path="/" element={<Games />} />
+            <Route path="/games">
+              <Route index element={<Games />} />
+              <Route
+                path=":id"
+                element={<Game game={GAME} screenshots={GAME_SCREENSHOT} />}
+              />
+            </Route>
+          </Routes>
         </div>
       </div>
     </div>

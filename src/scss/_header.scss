@@ -1,64 +1,63 @@
 .app_header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 6rem;
+  flex-wrap: wrap;
+
+  @include m-query($tablet) {
+    margin: 1rem 0;
+  }
+
+  & .logo {
+    margin: 0;
+    margin-right: 1.5rem;
+    color: #fff;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    @include m-query($tablet) {
+      margin-right: auto;
+    }
+  }
+
+  & .search_bar {
+    flex: 0 0 65%;
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 6rem;
-    flex-wrap: wrap;
-    
+    margin-right: auto;
+    position: relative;
+
+    &__icon {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      margin-left: 15px;
+    }
+
+    &__input {
+      width: 100%;
+      padding: 12px 15px 12px 30px;
+      padding-left: 40px;
+      outline: none;
+      border: 0;
+      border-radius: 32px;
+      background-color: var(--white-gray);
+    }
+
     @include m-query($tablet) {
-        margin: 1rem 0;
+      flex: 0 0 100%;
+      order: 2;
     }
-    
-    & .logo {
-        margin: 0;
-        margin-right: 1.5rem;
-        color: #fff;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        letter-spacing: .5px;
+  }
 
-        @include m-query($tablet) {
-            margin-right: auto;
-        }
-
-    }
-        
-    & .search_bar {
-        flex: 0 0 65%;
-        display: flex;
-        align-items: center;
-        margin-right: auto;
-        position: relative;
-
-        &__icon {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            margin-left: 15px;
-        }
-
-        &__input {
-            width: 100%;
-            padding: 12px 15px 12px 30px;
-            padding-left: 40px;
-            outline: none;
-            border: 0;
-            border-radius: 32px;
-            background-color: var(--white-gray);
-        }
-
-        @include m-query($tablet) {
-            flex: 0 0 100%;
-            order: 2;
-        }
-    }
-        
-    & .login {
-        color: #fff;
-        outline: 0;
-        border: 0;
-        background: none;
-        cursor: pointer;
-        text-transform: uppercase;
-    }
+  & .login {
+    color: #fff;
+    outline: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
 }

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { platformIcon } from 'src/helpers/platformIcon';
 
-const GameItem = ({ backgroundImage, platforms, metacritic, name }) => {
+const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
   return (
     <div className="game-item">
       <div
@@ -9,21 +10,19 @@ const GameItem = ({ backgroundImage, platforms, metacritic, name }) => {
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
       <div className="game-item__info">
-        <div className="game-item__info__top">
-          <div className="platforms">
+        <div>
+          <div className="game-item__platforms">
             {platforms.map(({ platform }) => (
-              <span className="icon" key={platform.id}>
-                {platformIcon(platform.slug)}
-              </span>
+              <span key={platform.id}>{platformIcon(platform.slug)}</span>
             ))}
           </div>
-          <span className="metascore" title="metascore">
+          <span className="game-item__metascore" title="metascore">
             {metacritic}
           </span>
         </div>
-        <div className="game-item__info__bottom">
-          <span className="title">{name}</span>
-        </div>
+        <Link to={`/games/${slug}`} className="game-item__title">
+          {name}
+        </Link>
       </div>
     </div>
   );

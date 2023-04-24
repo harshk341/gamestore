@@ -1,0 +1,91 @@
+.game {
+  width: 100%;
+  color: var(--white-gray);
+
+  &__info {
+    display: flex;
+    max-width: 80%;
+    flex-direction: column;
+    margin: 0 auto;
+
+    @include m-query($tablet) {
+      max-width: 100%;
+      margin: 0;
+    }
+  }
+  &__head {
+    display: flex;
+    margin: 1rem 0;
+    align-items: center;
+  }
+  &__released {
+    background-color: var(--white-gray);
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    color: var(--text-color);
+    border-radius: 32px;
+    margin-right: 1rem;
+  }
+  &__platform > span {
+    display: inline-block;
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+  }
+  &__title {
+    margin-bottom: 0.8rem;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+
+    @include m-query($mobile) {
+      font-size: 1.6rem;
+    }
+  }
+  &__screenshots,
+  &__content {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  &__description {
+    line-height: 1.5;
+    font-size: 16px;
+
+    & .read__more {
+      background: none;
+      padding: 0;
+      outline: 0;
+      border: 0;
+      cursor: pointer;
+      border-radius: 4px;
+      text-decoration: underline;
+      color: inherit;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__info__block {
+      width: 50%;
+      margin-top: 1.5rem;
+
+      &.expanded {
+        width: 100%;
+      }
+    }
+  }
+
+  & .swiper-button-prev,
+  & .swiper-button-next {
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--white-gray);
+    border-radius: 50%;
+
+    &::after {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+  }
+}

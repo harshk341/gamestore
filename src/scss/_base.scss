@@ -1,73 +1,87 @@
 html {
-    width: 100%;
-    font-size: 15px;
+  width: 100%;
+  font-size: 15px;
 }
-*, ::before, ::after {
-    box-sizing: border-box;
+*,
+::before,
+::after {
+  box-sizing: border-box;
 }
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
-body, input {
-    font-family: 'Lato', sans-serif;
+body,
+input {
+  font-family: 'Lato', sans-serif;
 }
 body {
-    width: 100%;
-    background-color: #f2f2f2;
-    color: var(--text-color);
-    font-weight: 400;
+  width: 100%;
+  background-color: #f2f2f2;
+  color: var(--text-color);
+  font-weight: 400;
 }
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 img {
-    max-width: 100%;
-    vertical-align: middle;
-    height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  height: auto;
 }
 .App {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .app_wrapper {
+  @include container-style;
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background: {
+      image: linear-gradient(
+          135deg,
+          rgba(72, 72, 72, 0.85) 10%,
+          rgba(50, 50, 50, 0.75)
+        ),
+        url('/images/bg-image.jpg');
+      position: center;
+      repeat: no-repeat;
+      attachment: fixed;
+      size: cover;
+    }
+  }
+
+  &__content {
     @include container-style;
-    
-    &::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: -1;
-        background:  {
-            image: linear-gradient(135deg, rgba(72, 72, 72, 0.5) 10%, rgba(50, 50, 50, 0.5)), url("/images/bg-image.jpg");
-            position: center;
-            repeat: no-repeat;
-            attachment: fixed;
-            size: cover;
-        };
-    }
-    
-    &__content {
-        @include container-style;
-        padding: 0 2rem;
-        max-width: $app-max-width;
-    }
+    padding: 0 2rem 4rem;
+    max-width: $app-max-width;
+  }
 }
-
+.heading-3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+.heading-4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
 .masonry-grid {
-    display: -webkit-box; 
-    display: -ms-flexbox; 
-    display: flex;
-    margin-left: -1.5rem; 
-    width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -1.5rem;
+  width: auto;
 
-    &_column {
-        padding-left: 1.5rem;
-        background-clip: padding-box;
-    }
+  &_column {
+    padding-left: 1.5rem;
+    background-clip: padding-box;
+  }
 }
-

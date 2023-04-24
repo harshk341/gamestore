@@ -7,7 +7,7 @@ import GameItem from './GameItem';
 const Games = () => {
   const renderGames = games => {
     return games.map(
-      ({ id, background_image, parent_platforms, metacritic, name }) => {
+      ({ id, background_image, parent_platforms, metacritic, name, slug }) => {
         return (
           <GameItem
             key={id}
@@ -15,6 +15,7 @@ const Games = () => {
             platforms={parent_platforms}
             metacritic={metacritic}
             name={name}
+            slug={slug}
           />
         );
       }
