@@ -3,6 +3,11 @@ import { platformIcon } from 'src/helpers/platformIcon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import {
+  IMAGE_URL,
+  LARGE_IMAGE_URL,
+  MEDIUM_IMAGE_URL
+} from 'src/constants/api';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -39,7 +44,10 @@ const Game = ({ game, screenshots }) => {
           </div>
         </div>
         <h2 className="game__title">{game.name}</h2>
-        <img src={game.background_image} alt={game.slug} />
+        <img
+          src={game.background_image.replace(IMAGE_URL, LARGE_IMAGE_URL)}
+          alt={game.slug}
+        />
         <div className="game__screenshots">
           <Swiper
             spaceBetween={10}
@@ -52,7 +60,10 @@ const Game = ({ game, screenshots }) => {
           >
             {screenshots.map(({ id, image }, indx) => (
               <SwiperSlide key={id}>
-                <img src={image} alt={`screenshots-${indx}`} />
+                <img
+                  src={image.replace(IMAGE_URL, LARGE_IMAGE_URL)}
+                  alt={`screenshots-${indx}`}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -66,7 +77,10 @@ const Game = ({ game, screenshots }) => {
           >
             {screenshots.map(({ id, image }, indx) => (
               <SwiperSlide key={id}>
-                <img src={image} alt={`screenshots-${indx}`} />
+                <img
+                  src={image.replace(IMAGE_URL, MEDIUM_IMAGE_URL)}
+                  alt={`screenshots-${indx}`}
+                />
               </SwiperSlide>
             ))}
           </Swiper>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { MEDIUM_IMAGE_URL, IMAGE_URL } from 'src/constants/api';
 import { platformIcon } from 'src/helpers/platformIcon';
 
 const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
@@ -7,7 +8,12 @@ const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
     <div className="game-item">
       <div
         className="game-item__background"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{
+          backgroundImage: `url(${backgroundImage.replace(
+            IMAGE_URL,
+            MEDIUM_IMAGE_URL
+          )})`
+        }}
       ></div>
       <div className="game-item__info">
         <div>
