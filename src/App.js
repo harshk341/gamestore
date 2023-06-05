@@ -1,26 +1,13 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Games, Header, Game } from 'src/components';
-import { GAME, GAME_SCREENSHOT } from './rawData';
+import { useRoutes } from 'react-router-dom';
+import router from './router';
 
 function App() {
+  let content = useRoutes(router);
+
   return (
     <div className="App">
-      <div className="app_wrapper">
-        <div className="app_wrapper__content">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Games />} />
-            <Route path="/games">
-              <Route index element={<Games />} />
-              <Route
-                path=":id"
-                element={<Game game={GAME} screenshots={GAME_SCREENSHOT} />}
-              />
-            </Route>
-          </Routes>
-        </div>
-      </div>
+      <div className="app_wrapper">{content}</div>
     </div>
   );
 }

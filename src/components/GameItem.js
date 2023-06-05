@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { MEDIUM_IMAGE_URL, IMAGE_URL } from 'src/constants/api';
 import { platformIcon } from 'src/helpers/platformIcon';
@@ -34,4 +34,4 @@ const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
   );
 };
 
-export default GameItem;
+export default memo(GameItem);
