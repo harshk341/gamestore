@@ -52,3 +52,12 @@ export const fetchGamesOnStart = (url, signal) => (dispatch, getState) => {
     dispatch(fetchGames({ url, signal }));
   }
 };
+
+export const fetchGamesOnNeed = nextUrl => (dispatch, getState) => {
+  const gamesState = selectGamesState(getState());
+  const isFetching = gamesState.loading;
+  const shouldFetch = !isFetching;
+  if (shouldFetch && nextUrl) {
+    dispatch(fetchGames({ url: nextUrl }));
+  }
+};

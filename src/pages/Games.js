@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'src/store';
-import { fetchGamesOnStart, selectGamesState } from 'src/slices/gamesSlice';
+import {
+  fetchGamesOnStart,
+  selectGamesState,
+  fetchGamesOnNeed
+} from 'src/slices/gamesSlice';
 import { GAMES_PATH } from 'src/constants/api';
 import { RenderGames, Error, Loader } from 'src/components';
+import infiniteScroll from 'src/components/HOCs/infiniteScroll';
 
 const Games = () => {
   const dispatch = useDispatch();
@@ -27,4 +32,4 @@ const Games = () => {
   );
 };
 
-export default Games;
+export default infiniteScroll(Games, fetchGamesOnNeed);

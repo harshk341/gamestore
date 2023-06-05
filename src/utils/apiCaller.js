@@ -9,9 +9,14 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   config => {
-    let newUrl = `${config.url}&key=${API_KEY}`;
-    if (!config.url.includes('?')) {
-      newUrl = newUrl.replace('&', '?');
+    let newUrl;
+    const { url } = config;
+    if (url.includes('?') && !url.includes(API_KEY)) {
+      newUrl = `${url}&key=${API_KEY}`;
+    } else if (url.includes(API_KEY)) {
+      newUrl = url;
+    } else {
+      newUrl = `${url}?key=${API_KEY}`;
     }
     config.url = newUrl;
     return Promise.resolve(config);
