@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { platformIcon } from 'src/helpers/platformIcon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import dayjs from 'dayjs';
@@ -17,16 +17,13 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 dayjs.extend(localizedFormat);
 
-const Game = ({ game, screenshots }) => {
+const RenderGame = ({ game, screenshots }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [short, setShort] = useState(true);
-  const shortRequired = game.description_raw.length > 270 && short;
+  const shortRequired = game.descriptionRaw.length > 270 && short;
   const shortDescription = shortRequired
-    ? `${game.description_raw.slice(
-        0,
-        ~~(game.description_raw.length / 2)
-      )}... `
-    : game.description_raw;
+    ? `${game.descriptionRaw.slice(0, ~~(game.descriptionRaw.length / 2))}... `
+    : game.descriptionRaw;
   const releasedDate = dayjs(game.released).format('ll');
   const toggleDescription = () => {
     setShort(prev => !prev);
@@ -38,14 +35,14 @@ const Game = ({ game, screenshots }) => {
         <div className="game__head">
           <span className="game__released">{releasedDate}</span>
           <div className="game__platform">
-            {game.parent_platforms.map(({ platform }) => (
+            {game.parentPlatforms.map(({ platform }) => (
               <span key={platform.id}>{platformIcon(platform.slug)}</span>
             ))}
           </div>
         </div>
         <h2 className="game__title">{game.name}</h2>
         <img
-          src={game.background_image.replace(IMAGE_URL, LARGE_IMAGE_URL)}
+          src={game.backgroundImage.replace(IMAGE_URL, LARGE_IMAGE_URL)}
           alt={game.slug}
         />
         <div className="game__screenshots">
@@ -89,7 +86,7 @@ const Game = ({ game, screenshots }) => {
           <h2 className="heading-3">About</h2>
           <p className="game__description">
             {shortDescription}
-            {game.description_raw.length > 270 && (
+            {game.descriptionRaw.length > 270 && (
               <button className="read__more" onClick={toggleDescription}>
                 Read {short ? 'more' : 'less'}
               </button>
@@ -137,4 +134,4 @@ const Game = ({ game, screenshots }) => {
   );
 };
 
-export default Game;
+export default memo(RenderGame);

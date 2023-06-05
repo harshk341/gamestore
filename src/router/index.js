@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
 import { BaseLayout } from 'src/components';
-import { GAMES_PATH, INDEX_PATH } from 'src/constants/api';
+import { GAMES_PATH, INDEX_PATH, GAME_PATH } from 'src/constants/api';
 
 const Loader = Component => props =>
   (
@@ -11,6 +11,7 @@ const Loader = Component => props =>
   );
 
 const Games = Loader(lazy(() => import('src/pages/Games')));
+const Game = Loader(lazy(() => import('src/pages/Game')));
 
 const router = [
   {
@@ -24,6 +25,10 @@ const router = [
       {
         path: GAMES_PATH,
         element: <Games />
+      },
+      {
+        path: GAME_PATH,
+        element: <Game />
       }
     ]
   },
