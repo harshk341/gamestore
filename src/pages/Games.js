@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'src/store';
-import {
-  fetchGamesOnStart,
-  selectGamesState,
-  fetchGamesOnNeed
-} from 'src/slices/gamesSlice';
-import { GAMES_PATH } from 'src/constants/api';
+import { fetchGamesOnStart, fetchGamesOnNeed } from 'src/slices/gamesSlice';
 import { RenderGames, Error, Loader } from 'src/components';
 import infiniteScroll from 'src/components/HOCs/infiniteScroll';
+import { getGameCollectionData } from 'src/selectors/gamesSelector';
+import { connect } from 'react-redux';
 
-const Games = () => {
-  const dispatch = useDispatch();
-  const { error, loading, games } = useSelector(selectGamesState);
+const Games = props => {
+  const { error, loading, games, collectionKey, gamesUrl, fetchGamesOnStart } =
+    props;
 
   useEffect(() => {
     const controller = new AbortController();
-    dispatch(fetchGamesOnStart(GAMES_PATH, controller.signal));
+    fetchGamesOnStart(gamesUrl, collectionKey, controller.signal);
 
     return () => controller.abort();
-  }, [dispatch]);
+  }, [gamesUrl, collectionKey, fetchGamesOnStart]);
 
   if (error) {
     return <Error classname="error" message={error} />;
@@ -32,4 +28,9 @@ const Games = () => {
   );
 };
 
-export default infiniteScroll(Games, fetchGamesOnNeed);
+export default connect(
+  state => ({
+    ...getGameCollectionData(state)
+  }),
+  { fetchGamesOnStart, fetchGamesOnNeed }
+)(infiniteScroll(Games));

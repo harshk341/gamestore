@@ -1,18 +1,23 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  createEntityAdapter
+} from '@reduxjs/toolkit';
+import { getGames } from 'src/selectors/globalSelector';
 import { apiCaller } from 'src/utils/apiCaller';
 
-const initialState = {
-  games: [],
-  nextUrl: null,
+const gamesAdapter = createEntityAdapter();
+
+const initialState = gamesAdapter.getInitialState({
   loading: false,
   error: null
-};
+});
 
 export const fetchGames = createAsyncThunk(
   'games/fetchGames',
-  async ({ url, ...rest }) => {
+  async ({ url, collectionKey, ...rest }) => {
     const data = await apiCaller.get(url, rest);
-    return { results: data.results, next: data.next };
+    return { games: data.results, nextUrl: data.next, id: collectionKey };
   }
 );
 
@@ -26,10 +31,15 @@ const gamesSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchGames.fulfilled, (state, action) => {
-        const { results, next } = action.payload;
+        const { games, nextUrl, id } = action.payload;
         state.loading = false;
-        state.games = state.games.concat(results);
-        state.nextUrl = next;
+        const existingCollection = state.entities[id];
+        if (existingCollection) {
+          existingCollection.games.push(...games);
+          existingCollection.nextUrl = nextUrl;
+        } else {
+          gamesAdapter.addOne(state, action.payload);
+        }
       })
       .addCase(fetchGames.rejected, (state, action) => {
         state.loading = false;
@@ -40,24 +50,31 @@ const gamesSlice = createSlice({
 
 export default gamesSlice.reducer;
 
-export const selectGamesState = state => state.games;
+export const {
+  selectById: selectGameCollectionByKey,
+  selectEntities: selectGamesEntities
+} = gamesAdapter.getSelectors(getGames);
 
-export const fetchGamesOnStart = (url, signal) => (dispatch, getState) => {
-  const gamesState = selectGamesState(getState());
-  const { loading, games } = gamesState;
-  const isFetching = loading;
-  const isExist = Boolean(games.length > 0);
-  const shouldFetch = Boolean(!isExist && !isFetching);
-  if (shouldFetch && url) {
-    dispatch(fetchGames({ url, signal }));
-  }
-};
+export const fetchGamesOnStart =
+  (url, collectionKey, signal) => (dispatch, getState) => {
+    const { loading } = getGames(getState());
+    const collections = selectGamesEntities(getState());
+    const isCollectionExist = !!collections[collectionKey];
+    const isFetching = loading;
+    const shouldFetch = Boolean(!isCollectionExist && !isFetching);
+    if (shouldFetch && url) {
+      dispatch(fetchGames({ url, collectionKey, signal }));
+    }
+  };
 
-export const fetchGamesOnNeed = nextUrl => (dispatch, getState) => {
-  const gamesState = selectGamesState(getState());
-  const isFetching = gamesState.loading;
-  const shouldFetch = !isFetching;
-  if (shouldFetch && nextUrl) {
-    dispatch(fetchGames({ url: nextUrl }));
-  }
-};
+export const fetchGamesOnNeed =
+  (nextUrl, collectionKey) => (dispatch, getState) => {
+    const { loading } = getGames(getState());
+    const collections = selectGamesEntities(getState());
+    const isCollectionExist = !!collections[collectionKey];
+    const isFetching = loading;
+    const shouldFetch = Boolean(isCollectionExist && !isFetching);
+    if (shouldFetch && nextUrl) {
+      dispatch(fetchGames({ url: nextUrl, collectionKey }));
+    }
+  };

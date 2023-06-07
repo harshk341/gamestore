@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import { selectGamesState } from 'src/slices/gamesSlice';
-import { useDispatch, useSelector } from 'src/store';
 
-const infiniteScroll = (Component, nextCallBack, debounce = 0) => {
+const infiniteScroll = (Component, debounce = 0) => {
   const InnerComponent = props => {
-    const { nextUrl } = useSelector(selectGamesState);
-    const dispatch = useDispatch();
+    const { nextUrl, fetchGamesOnNeed, collectionKey } = props;
     useEffect(() => {
       const handleScroll = () => {
         if (
@@ -13,7 +10,7 @@ const infiniteScroll = (Component, nextCallBack, debounce = 0) => {
           document.body.offsetHeight - 50
         ) {
           setTimeout(() => {
-            dispatch(nextCallBack(nextUrl));
+            fetchGamesOnNeed(nextUrl, collectionKey);
           }, debounce);
         }
       };
@@ -23,7 +20,7 @@ const infiniteScroll = (Component, nextCallBack, debounce = 0) => {
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
-    }, [dispatch, nextUrl]);
+    }, [nextUrl, collectionKey, fetchGamesOnNeed]);
 
     return <Component {...props} />;
   };

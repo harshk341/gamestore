@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MEDIUM_IMAGE_URL, IMAGE_URL } from 'src/constants/api';
 import { platformIcon } from 'src/helpers/platformIcon';
@@ -9,7 +10,7 @@ const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
       <div
         className="game-item__background"
         style={{
-          backgroundImage: `url(${backgroundImage.replace(
+          backgroundImage: `url(${(backgroundImage || '').replace(
             IMAGE_URL,
             MEDIUM_IMAGE_URL
           )})`
@@ -32,6 +33,19 @@ const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
       </div>
     </div>
   );
+};
+
+GameItem.defaultProps = {
+  backgroundImage: '',
+  name: ''
+};
+
+GameItem.propTypes = {
+  backgroundImage: PropTypes.string,
+  platforms: PropTypes.array,
+  metacritic: PropTypes.number,
+  name: PropTypes.string,
+  slug: PropTypes.string
 };
 
 export default memo(GameItem);
