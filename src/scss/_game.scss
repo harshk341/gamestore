@@ -73,6 +73,17 @@
         width: 100%;
       }
     }
+
+    &_tag {
+      display: inline-block;
+      text-decoration: none;
+      background-color: var(--white-gray);
+      color: var(--text-color);
+      border-radius: 32px;
+      padding: 4px 8px;
+      margin: 0 5px 5px 0;
+      font-size: 0.9rem;
+    }
   }
 
   & .swiper-button-prev,

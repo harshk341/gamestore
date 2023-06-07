@@ -65,17 +65,6 @@ export const {
   selectEntities: selectVisitedGameEntities
 } = gameAdapter.getSelectors(state => state.visitedGames);
 
-export const selectGameWithScreenshots = createSelector(
-  state => ({
-    loading: state.visitedGames.loading,
-    error: state.visitedGames.loading
-  }),
-  selectGame,
-  (state, id) =>
-    state.visitedGames.screenshots ? state.visitedGames.screenshots[id] : [],
-  (status, game, screenshots) => ({ game, screenshots, ...status })
-);
-
 export const fetchSingleGame = (slug, signal) => (dispatch, getState) => {
   const gamesEnities = selectVisitedGameEntities(getState());
   const game = gamesEnities[slug];

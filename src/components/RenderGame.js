@@ -15,6 +15,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
 import { FreeMode, Navigation, Thumbs } from 'swiper';
+import { Link } from 'react-router-dom';
 dayjs.extend(localizedFormat);
 
 const RenderGame = ({ game, screenshots }) => {
@@ -123,7 +124,23 @@ const RenderGame = ({ game, screenshots }) => {
               <h4 className="heading-4">Tags</h4>
               <p>
                 {game.tags.map((item, indx, arr) =>
-                  indx !== arr.length - 1 ? `${item.name}, ` : item.name
+                  indx !== arr.length - 1 ? (
+                    <Link
+                      className="game__meta_tag"
+                      key={item.slug}
+                      to={`/games?tags=${item.slug}`}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <Link
+                      className="game__meta_tag"
+                      key={item.slug}
+                      to={`/games?tags=${item.slug}`}
+                    >
+                      {item.name}
+                    </Link>
+                  )
                 )}
               </p>
             </div>

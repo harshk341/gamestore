@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { Error, Loader, RenderGame } from 'src/components';
 import { useParams } from 'react-router-dom';
-import {
-  fetchSingleGame,
-  selectGameWithScreenshots
-} from 'src/slices/gameSlice';
+import { fetchSingleGame } from 'src/slices/gameSlice';
 import { useDispatch, useSelector } from 'src/store';
+import { selectGameWithScreenshots } from 'src/selectors/gameSelector';
 
 const Game = () => {
   const dispatch = useDispatch();

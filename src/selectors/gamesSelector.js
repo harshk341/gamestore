@@ -17,7 +17,7 @@ const gameCollectionKey = (key, value) => {
     if (key === 'search') {
       return [GAME_COLLECTION_SEARCH, value].join('|');
     }
-    if (key === 'tag') {
+    if (key === 'tags') {
       return [GAME_COLLECTION_TAG, value].join('|');
     }
   }
