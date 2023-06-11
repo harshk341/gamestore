@@ -123,25 +123,15 @@ const RenderGame = ({ game, screenshots }) => {
             <div className="game__meta__info__block expanded">
               <h4 className="heading-4">Tags</h4>
               <p>
-                {game.tags.map((item, indx, arr) =>
-                  indx !== arr.length - 1 ? (
-                    <Link
-                      className="game__meta_tag"
-                      key={item.slug}
-                      to={`/games?tags=${item.slug}`}
-                    >
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <Link
-                      className="game__meta_tag"
-                      key={item.slug}
-                      to={`/games?tags=${item.slug}`}
-                    >
-                      {item.name}
-                    </Link>
-                  )
-                )}
+                {game.tags.map(item => (
+                  <Link
+                    className="game__meta_tag"
+                    key={item.slug}
+                    to={`/games?tags=${item.slug}`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </p>
             </div>
           </div>

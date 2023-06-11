@@ -1,0 +1,31 @@
+.genre-list {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  & > ul {
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+
+    & > li {
+      margin-right: 0.6rem;
+      margin-bottom: 0.6rem;
+
+      .genre_chip {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: var(--text-color);
+        color: var(--white-gray);
+        border-radius: 32px;
+      }
+
+      .genre_chip:hover,
+      .genre_chip.active {
+        color: var(--text-color);
+        background-color: var(--white-gray);
+      }
+    }
+  }
+}

@@ -8,7 +8,9 @@ import {
 import {
   GAME_COLLECTION,
   GAME_COLLECTION_SEARCH,
-  GAME_COLLECTION_TAG
+  GAME_COLLECTION_TAG,
+  GAME_COLLECTION_GENRE,
+  GENRES
 } from 'src/constants/global';
 import { selectGameCollectionByKey } from 'src/slices/gamesSlice';
 
@@ -19,6 +21,9 @@ const gameCollectionKey = (key, value) => {
     }
     if (key === 'tags') {
       return [GAME_COLLECTION_TAG, value].join('|');
+    }
+    if (key === 'genres') {
+      return [GAME_COLLECTION_GENRE, value].join('|');
     }
   }
   return [GAME_COLLECTION, 'default'].join('|');
@@ -46,6 +51,7 @@ export const getGameCollectionData = createSelector(
     games,
     collectionKey,
     nextUrl,
-    gamesUrl: search ? pathname + search : pathname
+    gamesUrl: search ? pathname + search : pathname,
+    genres: GENRES
   })
 );

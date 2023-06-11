@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
 import { fetchGamesOnStart, fetchGamesOnNeed } from 'src/slices/gamesSlice';
-import { RenderGames, Error, Loader } from 'src/components';
+import { RenderGames, Error, Loader, Genres } from 'src/components';
 import infiniteScroll from 'src/components/HOCs/infiniteScroll';
 import { getGameCollectionData } from 'src/selectors/gamesSelector';
 import { connect } from 'react-redux';
 
 const Games = props => {
-  const { error, loading, games, collectionKey, gamesUrl, fetchGamesOnStart } =
-    props;
+  const {
+    error,
+    loading,
+    games,
+    collectionKey,
+    gamesUrl,
+    fetchGamesOnStart,
+    genres
+  } = props;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -22,6 +29,7 @@ const Games = props => {
 
   return (
     <div className="game-list" style={{ width: '100%' }}>
+      <Genres genres={genres} classname="genre-list" />
       <RenderGames games={games} />
       <Loader isLoading={loading} classname="loader" />
     </div>
