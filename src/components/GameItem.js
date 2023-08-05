@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MEDIUM_IMAGE_URL, IMAGE_URL } from 'src/constants/api';
 import { platformIcon } from 'src/helpers/platformIcon';
+import { setMetascoreColor } from 'src/helpers/setMetascoreColor';
 
 const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
   return (
@@ -23,8 +24,13 @@ const GameItem = ({ backgroundImage, platforms, metacritic, name, slug }) => {
               <span key={platform.id}>{platformIcon(platform.slug)}</span>
             ))}
           </div>
-          <span className="game-item__metascore" title="metascore">
-            {metacritic}
+          <span
+            className={`game-item__metascore ${setMetascoreColor(
+              metacritic || 0
+            )}`}
+            title="metascore"
+          >
+            {metacritic || 0}
           </span>
         </div>
         <Link to={`/games/${slug}`} className="game-item__title">

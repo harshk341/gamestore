@@ -33,14 +33,7 @@
     }
   }
   &__metascore {
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    cursor: default;
+    @include metascore;
   }
   &__title {
     font-size: 1.4rem;

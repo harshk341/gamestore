@@ -16,15 +16,12 @@ import 'swiper/css/thumbs';
 
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 import { Link } from 'react-router-dom';
+import { setMetascoreColor } from 'src/helpers/setMetascoreColor';
 dayjs.extend(localizedFormat);
 
 const RenderGame = ({ game, screenshots }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [short, setShort] = useState(true);
-  const shortRequired = game.descriptionRaw.length > 270 && short;
-  const shortDescription = shortRequired
-    ? `${game.descriptionRaw.slice(0, ~~(game.descriptionRaw.length / 2))}... `
-    : game.descriptionRaw;
   const releasedDate = dayjs(game.released).format('ll');
   const toggleDescription = () => {
     setShort(prev => !prev);
@@ -85,30 +82,22 @@ const RenderGame = ({ game, screenshots }) => {
         </div>
         <div className="game__content">
           <h2 className="heading-3">About</h2>
-          <p className="game__description">
-            {shortDescription}
-            {game.descriptionRaw.length > 270 && (
-              <button className="read__more" onClick={toggleDescription}>
-                Read {short ? 'more' : 'less'}
-              </button>
-            )}
-          </p>
+          <div
+            className="game__description"
+            dangerouslySetInnerHTML={{
+              __html: game.description
+            }}
+          />
           <div className="game__meta">
             <div className="game__meta__info__block">
-              <h4 className="heading-4">Genre</h4>
-              <p>
-                {game.genres.map((item, indx, arr) =>
-                  indx !== arr.length - 1 ? `${item.name}, ` : item.name
-                )}
-              </p>
-            </div>
-            <div className="game__meta__info__block">
               <h4 className="heading-4">Metascore</h4>
-              <p>{game.metacritic}</p>
-            </div>
-            <div className="game__meta__info__block">
-              <h4 className="heading-4">Average Playtime</h4>
-              <p>{game.playtime}</p>
+              <p
+                className={`game_metascore ${setMetascoreColor(
+                  game.metacritic || 0
+                )}`}
+              >
+                {game.metacritic || 0}
+              </p>
             </div>
             <div className="game__meta__info__block">
               <h4 className="heading-4">Release date</h4>
@@ -117,7 +106,23 @@ const RenderGame = ({ game, screenshots }) => {
             <div className="game__meta__info__block expanded">
               <h4 className="heading-4">website</h4>
               <p>
-                <a href={game.website}>{game.website}</a>
+                <a href={game.website} style={{ textDecoration: 'underline' }}>
+                  {game.website}
+                </a>
+              </p>
+            </div>
+            <div className="game__meta__info__block expanded">
+              <h4 className="heading-4">Genres</h4>
+              <p>
+                {game.genres.map((item, indx, arr) => (
+                  <Link
+                    className="game__meta_genre"
+                    key={item.slug}
+                    to={`/games?genres=${item.slug}`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </p>
             </div>
             <div className="game__meta__info__block expanded">
