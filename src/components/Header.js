@@ -2,6 +2,7 @@ import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { push } from 'redux-first-history';
 import { useDispatch } from 'src/store';
+import { BiLogIn } from 'react-icons/bi';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,10 @@ const Header = () => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <button className="login">Login</button>
+      <button className="login">
+        <BiLogIn />
+        <span>Login</span>
+      </button>
     </header>
   );
 };
