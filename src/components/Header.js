@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { push } from 'redux-first-history';
 import { useDispatch } from 'src/store';
-import { BiLogIn } from 'react-icons/bi';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -33,10 +33,9 @@ const Header = () => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <button className="login">
-        <BiLogIn />
-        <span>Login</span>
-      </button>
+      <Link to="/login" className="login">
+        Log in
+      </Link>
     </header>
   );
 };

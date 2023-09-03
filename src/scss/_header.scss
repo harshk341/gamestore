@@ -55,7 +55,6 @@
   & .login {
     outline: 0;
     border: 0;
-    background: none;
     cursor: pointer;
     text-transform: uppercase;
     background-color: var(--text-color);
@@ -64,10 +63,6 @@
     border-radius: 32px;
     display: inline-flex;
     align-items: center;
-
-    & span {
-      margin-left: 0.4rem;
-    }
 
     &:hover {
       color: var(--text-color);
