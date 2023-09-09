@@ -10,3 +10,4 @@ export const INDEX_PATH = '/';
 export const GAMES_PATH = '/games';
 export const GAME_PATH = '/games/:slug';
 export const LOGIN_PATH = '/login';
+export const SIGNUP_PATH = '/signup';

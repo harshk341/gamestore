@@ -5,7 +5,8 @@ import {
   GAMES_PATH,
   INDEX_PATH,
   GAME_PATH,
-  LOGIN_PATH
+  LOGIN_PATH,
+  SIGNUP_PATH
 } from 'src/constants/api';
 
 const Loader = Component => props =>
@@ -18,6 +19,7 @@ const Loader = Component => props =>
 const Games = Loader(lazy(() => import('src/pages/Games')));
 const Game = Loader(lazy(() => import('src/pages/Game')));
 const Login = Loader(lazy(() => import('src/pages/Login')));
+const SignUp = Loader(lazy(() => import('src/pages/Signup')));
 
 const router = [
   {
@@ -39,6 +41,10 @@ const router = [
       {
         path: LOGIN_PATH,
         element: <Login />
+      },
+      {
+        path: SIGNUP_PATH,
+        element: <SignUp />
       }
     ]
   },
