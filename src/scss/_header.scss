@@ -52,7 +52,8 @@
     }
   }
 
-  & .login {
+  & .login,
+  & .signup {
     outline: 0;
     border: 0;
     cursor: pointer;
@@ -68,5 +69,8 @@
       color: var(--text-color);
       background-color: var(--white-gray);
     }
+  }
+  & .login {
+    margin-right: 0.8rem;
   }
 }
