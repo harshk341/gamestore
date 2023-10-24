@@ -18,6 +18,11 @@
     & .form_control {
       width: 100%;
       margin-bottom: 2rem;
+
+      .input_err {
+        color: #db1529;
+        display: inline-block;
+      }
     }
     input,
     button[type='submit'] {
@@ -27,6 +32,7 @@
       border: 0;
       padding: 1rem;
       border-radius: 4px;
+      margin-bottom: 0.5rem;
     }
     input {
       background-color: var(--text-color);
